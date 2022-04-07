@@ -7,4 +7,4 @@ Based on the standard ThirdPerson Blueprint template of UE 5.0, with C++ code ad
 ## Support and references
 
 To help diagnose any issue related to the underlying Plastic SCM "cm" Command Line Interface,
-please [Enable logging for Plastic SCM](https://www.plasticscm.com/documentation/technical-articles/kb-enabling-logging-for-plastic-scm-part-i)
+[Enable logging for Plastic SCM](https://www.plasticscm.com/documentation/technical-articles/kb-enabling-logging-for-plastic-scm-part-i)
