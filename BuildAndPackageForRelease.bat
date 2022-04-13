@@ -10,7 +10,7 @@ echo .
 
 REM TODO: read the plugin version from uplugin file and prompt the user to check, and name zip files from the version
 if [%1] == [] (
-  set /p VERSION="Enter the version name exactly as in the UE4PlasticPlugin.uplugin above (eg. 1.4.11): "
+  set /p VERSION="Enter the version name exactly as in the UE4PlasticPlugin.uplugin above: "
 ) else (
   set VERSION=%1
 )
