@@ -41,9 +41,10 @@ REM Using "ResavePackages" commandlet (see https://docs.unrealengine.com/en-us/E
 REM -ProjectOnly:	Exclude Engine Packages
 REM -unattended:	Editor is not monitored or is unable to receive user input. Disable UI pop-ups or other dialogs.
 echo on
-%UE4EDITOR% %UPROJECT% -run=ResavePackages -FixupRedirectors -AutoCheckOut -AutoCheckIn -ProjectOnly -unattended -Log=FixupRedirectors.log
+%UE4EDITOR% %UPROJECT% -run=ResavePackages -FixupRedirectors -AutoCheckOut -AutoCheckIn -ProjectOnly -unattended -LogCmds="global Verbose" -Log=FixupRedirectors.log
 @echo off
 if %errorlevel% neq 0 (
 	echo %TIME% ERROR: Exit code %ERRORLEVEL%
 	exit /b %errorlevel%
 )
+echo %TIME% Done
