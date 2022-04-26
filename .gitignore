@@ -13,5 +13,6 @@ Saved
 *.xcodeproj
 *.xcworkspace
 *.log
-.*plastic
 *.zip
+*plastic
+*Ignored*
