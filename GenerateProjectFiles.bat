@@ -5,7 +5,7 @@ set ROOTPATH=%~dp0
 
 pushd %ROOTPATH%
 
-REM Default to Unreal Engine 5, but can be overriden to UE4
+REM Default to Unreal Engine 5, but can be overriden to Sources from Github or to UE4
 if [%1] == [] (
   set ENGINE=5
 ) else (
@@ -16,8 +16,10 @@ if "%ENGINE%" == "4" (
   set UBT="C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\DotNET\UnrealBuildTool.exe"
 ) else if "%ENGINE%" == "5" (
   set UBT="C:\Program Files\Epic Games\UE_5.0\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe"
+) else if "%ENGINE%" == "S" (
+  set UBT="C:\Workspace\UnrealEngine\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe"
 ) else (
-  echo Engine version '%ENGINE%' need to be 4 or 5
+  echo Engine version '%ENGINE%' need to be 4, 5 or S for Sources from Github
   exit /b 1
 )
 
@@ -49,5 +51,5 @@ REM [CommandLine("-VSMac", Value = nameof(ProjectFileFormat.VisualStudioMac))]
 REM [CommandLine("-CLion", Value = nameof(ProjectFileFormat.CLion))]
 REM [CommandLine("-Rider", Value = nameof(ProjectFileFormat.Rider))]
 echo on
-%UBT% %UPROJECT% -ProjectFiles
+%UBT% %UPROJECT% -ProjectFiles -Game -Engine
 @echo off
