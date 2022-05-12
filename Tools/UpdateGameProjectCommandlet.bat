@@ -6,7 +6,7 @@ set ROOTPATH="%~dp0\.."
 
 pushd %ROOTPATH%
 
-REM Default to Unreal Engine 5, but can be overriden to UE4
+REM Default to Unreal Engine 5, but can be overriden to Sources from Github or to UE4
 if [%1] == [] (
   set ENGINE=5
 ) else (
@@ -39,12 +39,11 @@ for %%i in ("%UPROJECT%") do (
   set PROJECT=%%~ni
 )
 
-REM Using "ResavePackages" commandlet (see https://docs.unrealengine.com/en-us/Engine/Basics/Redirectors#resavepackagescommandlet)
-REM -ProjectOnly:	Exclude Engine Packages
+REM Using "UpdateGameProject" commandlet
 REM -unattended:	Editor is not monitored or is unable to receive user input. Disable UI pop-ups or other dialogs.
 REM -LogCmds: Enable Verbose logs
 echo on
-%UE4EDITOR% %UPROJECT% -run=ResavePackages -FixupRedirectors -AutoCheckOut -AutoCheckIn -ProjectOnly -unattended -LogCmds="global Verbose" -Log=FixupRedirectors.log
+%UE4EDITOR% %UPROJECT% -run=UpdateGameProject -AutoCheckOut -AutoSubmit -unattended -LogCmds="LogSourceControl Verbose" -Log=UpdateGameProject.log
 @echo off
 if %errorlevel% neq 0 (
 	echo %TIME% ERROR: Exit code %ERRORLEVEL%
