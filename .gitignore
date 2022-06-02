@@ -2,6 +2,8 @@ Binaries
 DerivedDataCache
 Intermediate
 Saved
+Makefile
+CMakeLists.txt
 .vscode
 .vs
 *.VC.db
@@ -12,7 +14,11 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
+*.kdev4
 *.log
+*.pro
+*.pri
 *.zip
 *.plastic*
 *Ignored*
+*.pyc
