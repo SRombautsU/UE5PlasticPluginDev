@@ -352,6 +352,8 @@ _ERROR_CATEGORIES = [
     'whitespace/indent',
     'whitespace/line_length',
     'whitespace/newline',
+    # SRombauts
+	'whitespace/endline',
     'whitespace/operators',
     'whitespace/parens',
     'whitespace/semicolon',
@@ -6680,23 +6682,13 @@ def ProcessFile(filename, vlevel, extra_check_functions=None):
     ProcessFileData(filename, file_extension, lines, Error,
                     extra_check_functions)
 
-    # If end-of-line sequences are a mix of LF and CR-LF, issue
-    # warnings on the lines with CR.
-    #
-    # Don't issue any warnings if all lines are uniformly LF or CR-LF,
-    # since critique can handle these just fine, and the style guide
-    # doesn't dictate a particular end of line sequence.
-    #
-    # We can't depend on os.linesep to determine what the desired
-    # end-of-line sequence should be, since that will return the
-    # server-side end-of-line sequence.
-    if lf_lines and crlf_lines:
-      # Warn on every line with CR.  An alternative approach might be to
-      # check whether the file is mostly CRLF or just LF, and warn on the
-      # minority, we bias toward LF here since most tools prefer LF.
-      for linenum in crlf_lines:
-        Error(filename, linenum, 'whitespace/newline', 1,
-              'Unexpected \\r (^M) found; better to use only \\n')
+    # SRombauts:
+    # Issue warnings on the first line with CR-LF
+
+    if crlf_lines:
+      linenum = crlf_lines[0]
+      Error(filename, linenum, 'whitespace/endline', 5,
+            'Unexpected \\r (^M) found; better to use only \\n')
 
   # Suppress printing anything if --quiet was passed unless the error
   # count has increased after processing this file.
