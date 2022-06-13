@@ -31,5 +31,12 @@
 			"Name": "FunctionalTestingEditor",
 			"Enabled": true
 		}
-	]
+	],
+	"PostBuildSteps":
+	{
+		"Win64": [
+			"echo PostBuildSteps: running cpplint...",
+			"\"$(EngineDir)\\Binaries\\ThirdParty\\Python3\\Win64\\Python.exe\" \"$(ProjectDir)\\Tools\\cpplint_source_files.py\" --source=\"$(ProjectDir)\\Plugins\\UE4PlasticPlugin\\Source\\PlasticSourceControl\""
+		]
+	}
 }
