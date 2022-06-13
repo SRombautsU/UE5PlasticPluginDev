@@ -1252,7 +1252,9 @@ class _CppLintState(object):
 
   def __init__(self):
     self.verbose_level = 1  # global setting.
-    self.error_count = 0    # global count of reported errors
+    # SRombauts: warning < error
+    self.error_count = 0    # global count of reported errors (confidence 5)
+    self.warning_count = 0  # global count of reported warnings (confidence < 5)
     # filters to apply when emitting error messages
     self.filters = _DEFAULT_FILTERS[:]
     # backup of filter list. Used to restore the state after each file.
@@ -1334,12 +1336,18 @@ class _CppLintState(object):
 
   def ResetErrorCounts(self):
     """Sets the module's error statistic back to zero."""
+    # SRombauts: warning < error
     self.error_count = 0
+    self.warning_count = 0
     self.errors_by_category = {}
 
-  def IncrementErrorCount(self, category):
+  def IncrementErrorCount(self, category, confidence):
     """Bumps the module's error statistic."""
-    self.error_count += 1
+    # SRombauts: warning < error
+    if confidence == 5:
+      self.error_count += 1
+    else:
+      self.warning_count += 1
     if self.counting in ('toplevel', 'detailed'):
       if self.counting != 'detailed':
         category = category.split('/')[0]
@@ -1354,6 +1362,9 @@ class _CppLintState(object):
                        (category, count))
     if self.error_count > 0:
       self.PrintInfo('Total errors found: %d\n' % self.error_count)
+    # SRombauts: warning < error
+    if self.warning_count > 0:
+      self.PrintInfo('Total warnings found: %d\n' % self.warning_count)
 
   def PrintInfo(self, message):
     # _quiet does not represent --quiet flag.
@@ -1708,10 +1719,15 @@ def Error(filename, linenum, category, confidence, message):
     message: The error message.
   """
   if _ShouldPrintError(category, confidence, linenum):
-    _cpplint_state.IncrementErrorCount(category)
+    _cpplint_state.IncrementErrorCount(category, confidence)
     if _cpplint_state.output_format == 'vs7':
-      _cpplint_state.PrintError('%s(%s): error cpplint: [%s] %s [%d]\n' % (
-          filename, linenum, category, message, confidence))
+      # SRombauts: warning < error
+      if confidence == 5:
+        _cpplint_state.PrintError('%s(%s): error cpplint: [%s] %s [%d]\n' % (
+            filename, linenum, category, message, confidence))
+      else: # confidence == [0-4]
+        _cpplint_state.PrintError('%s(%s): warning cpplint: [%s] %s [%d]\n' % (
+            filename, linenum, category, message, confidence))
     elif _cpplint_state.output_format == 'eclipse':
       sys.stderr.write('%s:%s: warning: %s  [%s] [%d]\n' % (
           filename, linenum, message, category, confidence))
