@@ -6804,20 +6804,23 @@ def ParseArguments(args):
     elif opt == '--includeorder':
       ProcessIncludeOrderOption(val)
 
+  # SRombauts
+  _SetOutputFormat(output_format)
+  _SetQuiet(quiet)
+  _SetVerboseLevel(verbosity)
+  _SetFilters(filters)
+  _SetCountingStyle(counting_style)
+
   if not filenames:
-    PrintUsage('No files were specified.')
+    # TODO(SRombauts) how to make that upstream?
+    #PrintUsage('No files were specified.')
+    return []
 
   if recursive:
     filenames = _ExpandDirectories(filenames)
 
   if _excludes:
     filenames = _FilterExcludedFiles(filenames)
-
-  _SetOutputFormat(output_format)
-  _SetQuiet(quiet)
-  _SetVerboseLevel(verbosity)
-  _SetFilters(filters)
-  _SetCountingStyle(counting_style)
 
   filenames.sort()
   return filenames
