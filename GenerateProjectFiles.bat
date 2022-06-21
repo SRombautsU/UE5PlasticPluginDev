@@ -14,10 +14,16 @@ if [%1] == [] (
 
 if "%ENGINE%" == "4" (
   set UBT="C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\DotNET\UnrealBuildTool.exe"
+  REM Legacy "Rocket" binary build of Unreal Engine 4 (using -Engine would try and fail to build the tools)
+  set ROCKETENGINE=-Rocket
 ) else if "%ENGINE%" == "5" (
   set UBT="C:\Program Files\Epic Games\UE_5.0\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe"
+  REM Binary Unreal Engine 5 got rid of the legacy -Rocket flag for binary builds
+  set ROCKETENGINE=-Engine
 ) else if "%ENGINE%" == "S" (
   set UBT="C:\Workspace\UnrealEngine\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe"
+  REM Source code Engine
+  set ROCKETENGINE=-Engine
 ) else (
   echo Engine version '%ENGINE%' need to be 4, 5 or S for Sources from Github
   exit /b 1
@@ -51,5 +57,5 @@ REM [CommandLine("-VSMac", Value = nameof(ProjectFileFormat.VisualStudioMac))]
 REM [CommandLine("-CLion", Value = nameof(ProjectFileFormat.CLion))]
 REM [CommandLine("-Rider", Value = nameof(ProjectFileFormat.Rider))]
 echo on
-%UBT% %UPROJECT% -ProjectFiles -Game -Engine
+%UBT% %UPROJECT% -ProjectFiles -Game %ROCKETENGINE%
 @echo off
