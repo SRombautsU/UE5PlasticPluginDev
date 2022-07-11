@@ -18,20 +18,6 @@ def find_files_in_directory(path, excluded_subdirectories=None, extensions_list=
     @param only_writable_files: if True will only look for writable files
     @return: the list of writable files
     """
-
-    #TODO print current dir or make the source an absolute path instead?
-    print(path)
-
-    print(os.getcwd())
-    print(__file__)
-    print(os.path.dirname(__file__))
-
-    # move to project root
-    project_root = os.path.join(os.path.dirname(__file__), "..")
-    os.chdir(project_root)
-
-    print(os.getcwd())
-
     file_list = []
     paths = Path(path).rglob("*") if recursive else Path(path).glob("*")
     for path in paths:
