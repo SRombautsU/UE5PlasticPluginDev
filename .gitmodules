@@ -1,4 +1,4 @@
 [submodule "Plugins/UE4PlasticPlugin"]
-	path = Plugins/UE4PlasticPlugin
+	path = Plugins/UEPlasticPlugin
 	url = ../UE4PlasticPlugin
 	branch = master
