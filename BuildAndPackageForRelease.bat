@@ -5,7 +5,7 @@ set ROOT_PATH=%~dp0
 
 pushd %ROOT_PATH%
 
-type Plugins\UE4PlasticPlugin\PlasticSourceControl.uplugin
+type Plugins\UEPlasticPlugin\PlasticSourceControl.uplugin
 echo .
 
 REM TODO: read the plugin version from uplugin file and prompt the user to check, and name zip files from the version
@@ -32,7 +32,7 @@ if [%GIT_CLEAN_RESET%] == [] (
   echo on
   git clean -fdx
   git reset --hard
-  pushd Plugins\UE4PlasticPlugin
+  pushd Plugins\UEPlasticPlugin
   git clean -fdx
   git reset --hard
   popd
@@ -43,7 +43,7 @@ REM create a tag on the current branch
 set /p GIT_TAG="Git tag version %VERSION% of the plugin on the current branch (ENTER/N)? "
 if [%GIT_TAG%] == [] (
   echo on
-  pushd Plugins\UE4PlasticPlugin
+  pushd Plugins\UEPlasticPlugin
   git tag %VERSION%
   popd
   @echo off
@@ -54,12 +54,12 @@ REM Unreal Engine 4.27
 REM
 
 REM Let's ensure that the plugin is correctly built for Unreal 4.27
-del /Q Plugins\UE4PlasticPlugin\Binaries\Win64\*
+del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
 call Build.bat 4
 REM TODO ensure the build has succeeded
 
 REM check for the binaries
-if NOT exist Plugins\UE4PlasticPlugin\Binaries\Win64\UE4Editor-PlasticSourceControl.dll (
+if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UE4Editor-PlasticSourceControl.dll (
   echo Something is wrong, some binaries are missing.
   exit /b 1
 )
@@ -80,12 +80,12 @@ REM Unreal Engine 5.0
 REM
 
 REM Let's ensure that the plugin is correctly built for Unreal 5.0
-del /Q Plugins\UE4PlasticPlugin\Binaries\Win64\*
+del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
 call Build.bat 5
 REM TODO ensure the build has succeeded
 
 REM check for the binaries
-if NOT exist Plugins\UE4PlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
+if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
   echo Something is wrong, some binaries are missing.
   exit /b 1
 )
@@ -107,4 +107,4 @@ REM
 
 echo .
 echo NOTE: After validation, push the new tag using:
-echo   git push https://github.com/PlasticSCM/UE4PlasticPlugin.git %VERSION%
+echo   git push https://github.com/PlasticSCM/UEPlasticPlugin.git %VERSION%
