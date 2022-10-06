@@ -1,10 +1,15 @@
 Binaries
+Build
 DerivedDataCache
 Intermediate
 Saved
+Script
+/enc_temp_folder
 Makefile
 CMakeLists.txt
+.ignore
 .vscode
+.vsconfig
 .vs
 *.VC.db
 *.opensdf
@@ -12,6 +17,7 @@ CMakeLists.txt
 *.sdf
 *.sln
 *.suo
+*.code-workspace
 *.xcodeproj
 *.xcworkspace
 *.kdev4
@@ -19,6 +25,8 @@ CMakeLists.txt
 *.pro
 *.pri
 *.zip
-*.plastic*
-*Ignored*
 *.pyc
+
+*.plastic*
+
+*Ignored*
