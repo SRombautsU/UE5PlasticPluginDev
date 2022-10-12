@@ -1,5 +1,5 @@
 @echo off
-setlocal
+setlocal EnableDelayedExpansion
 
 set ROOTPATH=%~dp0
 
@@ -13,11 +13,14 @@ if [%1] == [] (
 )
 
 if "%ENGINE%" == "4" (
-  set UBT="C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\DotNET\UnrealBuildTool.exe"
+  set ENGINEPATH="C:\Program Files\Epic Games\UE_4.27"
+  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool.exe
 ) else if "%ENGINE%" == "5" (
-  set UBT="C:\Program Files\Epic Games\UE_5.0\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe"
+  set ENGINEPATH="C:\Program Files\Epic Games\UE_5.0"
+  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
 ) else if "%ENGINE%" == "S" (
-  set UBT="C:\Workspace\UnrealEngine\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe"
+  set ENGINEPATH="C:\Workspace\UnrealEngine"
+  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
 ) else (
   echo Engine version '%ENGINE%' need to be 4, 5 or S for Sources from Github
   exit /b 1
@@ -28,6 +31,8 @@ if not exist %UBT% (
     exit /b
 )
 
+echo Unsing Unreal Engine from %ENGINEPATH%
+
 for %%a in (*.uproject) do set "UPROJECT=%CD%\%%a"
 if not defined UPROJECT (
     echo *.uproject file not found
@@ -37,6 +42,9 @@ if not defined UPROJECT (
 for %%i in ("%UPROJECT%") do (
   set PROJECT=%%~ni
 )
+
+echo Generate Project Files for %UPROJECT% (project '%PROJECT%')
+
 
 echo on
 %UBT% %UPROJECT% Win64 Development %PROJECT%Editor
