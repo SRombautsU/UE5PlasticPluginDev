@@ -18,7 +18,7 @@ if "%ENGINE%" == "4" (
   REM Legacy "Rocket" binary build of Unreal Engine 4 (using -Engine would try and fail to build the tools)
   set ROCKETENGINE=-Rocket
 ) else if "%ENGINE%" == "5" (
-  set ENGINEPATH="C:\Program Files\Epic Games\UE_5.0"
+  set ENGINEPATH="C:\Program Files\Epic Games\UE_5.1"
   set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
   REM Binary Unreal Engine 5 got rid of the legacy -Rocket flag for binary builds
   set ROCKETENGINE=-Engine
