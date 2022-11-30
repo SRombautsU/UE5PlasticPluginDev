@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Codice Software
+// Copyright Unity Technologies. All Rights Reserved.
 
 #include "UE5PlasticPluginDevCharacter.h"
 #include "Camera/CameraComponent.h"
