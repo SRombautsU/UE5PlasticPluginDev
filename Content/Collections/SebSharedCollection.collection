@@ -1,0 +1,10 @@
+FileVersion:2
+Type:Static
+Guid:BFB4C6CF-4EDC-5CF4-7330-0C9DE114834B
+ParentGuid:00000000-0000-0000-0000-000000000000
+Color:(R=0.964686,G=0.057048,B=0.527640,A=1.000000)
+
+/Game/LevelPrototyping/Materials/M_NewMaterial.M_NewMaterial
+/Game/LevelPrototyping/Materials/MI_Solid_Blue.MI_Solid_Blue
+/Game/LevelPrototyping/Materials/MI_Solid_Red.MI_Solid_Red
+/Game/ThirdPerson/Blueprints/BP_Cube.BP_Cube
