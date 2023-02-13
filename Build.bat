@@ -15,6 +15,12 @@ if [%1] == [] (
 if "%ENGINE%" == "4" (
   set ENGINEPATH="C:\Program Files\Epic Games\UE_4.27"
   set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool.exe
+) else if "%ENGINE%" == "50" (
+  set ENGINEPATH="C:\Program Files\Epic Games\UE_5.0"
+  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
+) else if "%ENGINE%" == "51" (
+  set ENGINEPATH="C:\Program Files\Epic Games\UE_5.1"
+  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
 ) else if "%ENGINE%" == "5" (
   set ENGINEPATH="C:\Program Files\Epic Games\UE_5.1"
   set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe

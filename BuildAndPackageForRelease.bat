@@ -81,7 +81,7 @@ REM
 
 REM Let's ensure that the plugin is correctly built for Unreal 5.0
 del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
-call Build.bat 5
+call Build.bat 50
 REM TODO ensure the build has succeeded
 
 REM check for the binaries
@@ -90,8 +90,42 @@ if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceCo
   exit /b 1
 )
 
-set ARCHIVE_NAME_REL=UE5PlasticPlugin-%VERSION%.zip
-set ARCHIVE_NAME_DBG=UE5PlasticPlugin-%VERSION%-with-debug-symbols.zip
+set ARCHIVE_NAME_REL=UE50PlasticPlugin-%VERSION%.zip
+set ARCHIVE_NAME_DBG=UE50PlasticPlugin-%VERSION%-with-debug-symbols.zip
+
+echo on
+del %ARCHIVE_NAME_REL%
+del %ARCHIVE_NAME_DBG%
+
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
+@echo off
+
+REM
+REM Unreal Engine 5.1
+REM
+
+REM Let's ensure that the plugin is correctly built for Unreal 5.1
+del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
+call Build.bat 51
+REM TODO ensure the build has succeeded
+
+REM check for the binaries
+if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
+  echo Something is wrong, some binaries are missing.
+  exit /b 1
+)
+
+set ARCHIVE_NAME_REL=UE51PlasticPlugin-%VERSION%.zip
+set ARCHIVE_NAME_DBG=UE51PlasticPlugin-%VERSION%-with-debug-symbols.zip
+
+echo on
+del %ARCHIVE_NAME_REL%
+del %ARCHIVE_NAME_DBG%
+
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
+@echo off
 
 echo on
 del %ARCHIVE_NAME_REL%
