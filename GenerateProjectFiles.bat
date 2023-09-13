@@ -18,7 +18,7 @@ if "%ENGINE%" == "4" (
   REM Legacy "Rocket" binary build of Unreal Engine 4 (using -Engine would try and fail to build the tools)
   set ROCKETENGINE=-Rocket
 ) else if "%ENGINE%" == "5" (
-  set ENGINEPATH="C:\Program Files\Epic Games\UE_5.1"
+  set ENGINEPATH="C:\Program Files\Epic Games\UE_5.3"
   set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
   REM Binary Unreal Engine 5 got rid of the legacy -Rocket flag for binary builds
   set ROCKETENGINE=-Engine
@@ -68,11 +68,11 @@ echo on
 @echo ## Visual Studio 2019/2022:
 %UBT% %UPROJECT% -ProjectFiles -Game %ROCKETENGINE%
 @echo.
-@echo ## Visual Studio Code:
-%UBT% %UPROJECT% -ProjectFiles -Game %ROCKETENGINE% -VSCode
-@echo.
-@echo ## Rider:
-%UBT% %UPROJECT% -ProjectFiles -Game %ROCKETENGINE% -Rider
-@echo.
+@REM @echo ## Visual Studio Code:
+@REM %UBT% %UPROJECT% -ProjectFiles -Game %ROCKETENGINE% -VSCode
+@REM @echo.
+@REM @echo ## Rider:
+@REM %UBT% %UPROJECT% -ProjectFiles -Game %ROCKETENGINE% -Rider
+@REM @echo.
 @echo Done
 @echo off

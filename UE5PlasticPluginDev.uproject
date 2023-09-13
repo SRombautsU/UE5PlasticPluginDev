@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.1",
+	"EngineAssociation": "5.3",
 	"Category": "Editor",
 	"Description": "Plastic SCM Source Control plugin development environment.",
 	"Modules": [
@@ -19,15 +19,6 @@
 			]
 		},
 		{
-			"Name": "Bridge",
-			"Enabled": false,
-			"SupportedTargetPlatforms": [
-				"Win64",
-				"Mac",
-				"Linux"
-			]
-		},
-		{
 			"Name": "FunctionalTestingEditor",
 			"Enabled": true
 		}
@@ -36,7 +27,7 @@
 	{
 		"Win64": [
 			"echo PostBuildSteps: running cpplint...",
-			"\"$(EngineDir)\\Binaries\\ThirdParty\\Python3\\Win64\\Python.exe\" \"$(ProjectDir)\\Tools\\cpplint_source_files.py\" --source=\"$(ProjectDir)\\Plugins\\UE4PlasticPlugin\\Source\\PlasticSourceControl\""
+			"\"$(EngineDir)\\Binaries\\ThirdParty\\Python3\\Win64\\Python.exe\" \"$(ProjectDir)\\Tools\\cpplint_source_files.py\" --source=\"$(ProjectDir)\\Plugins\\UEPlasticPlugin\\Source\\PlasticSourceControl\""
 		]
 	}
 }

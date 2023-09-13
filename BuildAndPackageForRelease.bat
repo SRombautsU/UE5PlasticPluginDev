@@ -81,7 +81,7 @@ REM
 
 REM Let's ensure that the plugin is correctly built for Unreal 5.0
 del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
-call Build.bat 50
+call Build.bat 5.0
 REM TODO ensure the build has succeeded
 
 REM check for the binaries
@@ -107,7 +107,7 @@ REM
 
 REM Let's ensure that the plugin is correctly built for Unreal 5.1
 del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
-call Build.bat 51
+call Build.bat 5.1
 REM TODO ensure the build has succeeded
 
 REM check for the binaries
@@ -126,6 +126,50 @@ del %ARCHIVE_NAME_DBG%
 Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
 Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
 @echo off
+
+REM
+REM Unreal Engine 5.2
+REM
+
+REM Let's ensure that the plugin is correctly built for Unreal 5.2
+del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
+call Build.bat 5.2
+REM TODO ensure the build has succeeded
+
+REM check for the binaries
+if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
+  echo Something is wrong, some binaries are missing.
+  exit /b 1
+)
+
+set ARCHIVE_NAME_REL=UE52PlasticPlugin-%VERSION%.zip
+set ARCHIVE_NAME_DBG=UE52PlasticPlugin-%VERSION%-with-debug-symbols.zip
+
+echo on
+del %ARCHIVE_NAME_REL%
+del %ARCHIVE_NAME_DBG%
+
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
+@echo off
+
+REM
+REM Unreal Engine 5.3
+REM
+
+REM Let's ensure that the plugin is correctly built for Unreal 5.3
+del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
+call Build.bat 5.3
+REM TODO ensure the build has succeeded
+
+REM check for the binaries
+if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
+  echo Something is wrong, some binaries are missing.
+  exit /b 1
+)
+
+set ARCHIVE_NAME_REL=UE53PlasticPlugin-%VERSION%.zip
+set ARCHIVE_NAME_DBG=UE53PlasticPlugin-%VERSION%-with-debug-symbols.zip
 
 echo on
 del %ARCHIVE_NAME_REL%
