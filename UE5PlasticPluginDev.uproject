@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"EngineAssociation": "5.3",
 	"Category": "Editor",
-	"Description": "Plastic SCM Source Control plugin development environment.",
+	"Description": "Unity Version Control (Formerly Plastic SCM) plugin development environment.",
 	"Modules": [
 		{
 			"Name": "UE5PlasticPluginDev",

@@ -1,6 +1,6 @@
 # UE5PlasticPluginDev
 
-Development project for the [Plastic SCM Unreal Engine Source Control Provider Plugin](https://github.com/PlasticSCM/UE4PlasticPlugin/)
+Development environment for the [Unity Version Control (formerly Plastic SCM) provider plugin for Unreal Engine](https://github.com/PlasticSCM/UEPlasticPlugin/)
 
 Based on the standard ThirdPerson Blueprint template of UE 5.0, with C++ code added by the Wizard.
 

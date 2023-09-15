@@ -5,47 +5,47 @@ set ROOTPATH=%~dp0
 
 pushd %ROOTPATH%
 
-REM Default to Unreal Engine 5, but can be overriden to Sources from Github or to UE4
+REM Default to the latest Unreal Engine 5 version but can be overriden by any other version, a source build from Github, or even UE4
 if [%1] == [] (
-  set ENGINE=5
+  set ENGINE=5.3
 ) else (
   set ENGINE=%1
 )
 
-if "%ENGINE%" == "4" (
-  set ENGINEPATH="C:\Program Files\Epic Games\UE_4.27"
+if "%ENGINE%" == "4.27" (
+  set ENGINEPATH="C:\Program Files\Epic Games\UE_%ENGINE%"
   set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool.exe
   REM Legacy "Rocket" binary build of Unreal Engine 4 (using -Engine would try and fail to build the tools)
   set ROCKETENGINE=-Rocket
-) else if "%ENGINE%" == "5" (
-  set ENGINEPATH="C:\Program Files\Epic Games\UE_5.3"
-  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
-  REM Binary Unreal Engine 5 got rid of the legacy -Rocket flag for binary builds
-  set ROCKETENGINE=-Engine
 ) else if "%ENGINE%" == "S" (
   set ENGINEPATH="C:\Workspace\UnrealEngine"
   set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
   REM Source code Engine
   set ROCKETENGINE=-Engine
 ) else (
-  echo Engine version '%ENGINE%' need to be 4, 5 or S for Sources from Github
-  exit /b 1
+  set ENGINEPATH="C:\Program Files\Epic Games\UE_%ENGINE%"
+  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
+  set ROCKETENGINE=-Engine
 )
 
 if not exist %UBT% (
-    echo %UBT% not found
-    exit /b
+  echo %UBT% not found
+  exit /b
 )
 
-echo Unsing Unreal Engine from %ENGINEPATH%
+echo Unsing Unreal Engine %ENGINE% from %ENGINEPATH%
 
 for %%a in (*.uproject) do set "UPROJECT=%CD%\%%a"
 if not defined UPROJECT (
-    echo *.uproject file not found
-    exit /b
+  echo *.uproject file not found
+  exit /b
 )
 
-echo Generate Project Files for %UPROJECT%
+for %%i in ("%UPROJECT%") do (
+  set PROJECT=%%~ni
+)
+
+echo Generate Project Files for %UPROJECT% (project '%PROJECT%')
 
 
 REM See Engine\Source\Programs\UnrealBuildTool\Modes\GenerateProjectFilesMode.cs
