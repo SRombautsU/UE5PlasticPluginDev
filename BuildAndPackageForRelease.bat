@@ -7,7 +7,7 @@ pushd %ROOT_PATH%
 
 echo Plugins\UEPlasticPlugin\PlasticSourceControl.uplugin:
 type Plugins\UEPlasticPlugin\PlasticSourceControl.uplugin
-echo .
+echo.
 
 REM Read the plugin version from uplugin file and prompt the user to check, and name zip files from the version
 if [%1] == [] (
@@ -41,7 +41,7 @@ if [%GIT_CLEAN_RESET%] == [] (
   popd
   @echo off
 ) else (
-  echo "WARNING: Skipping git clean should only be for testing purpose!"
+  echo WARNING: Skipping git clean should only be for testing purpose!
 )
 
 REM create a tag on the current branch
@@ -55,142 +55,66 @@ if [%GIT_TAG%] == [] (
 )
 
 
-REM TODO: use a function to handle the following 5 builds
-
 REM
-REM Unreal Engine 4.27
+REM #####################
 REM
-
-REM Let's ensure that the plugin is correctly built for Unreal 4.27
-del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
-call Build.bat 4
-REM TODO ensure the build has succeeded
-
-REM check for the binaries
-if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UE4Editor-PlasticSourceControl.dll (
-  echo Something is wrong, some binaries are missing.
-  exit /b 1
-)
-
-set ARCHIVE_NAME_REL=UE4PlasticPlugin-%VERSION%.zip
-set ARCHIVE_NAME_DBG=UE4PlasticPlugin-%VERSION%-with-debug-symbols.zip
-
-echo on
-del %ARCHIVE_NAME_REL%
-del %ARCHIVE_NAME_DBG%
-
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
-@echo off
-
+call :BuildAndPackage 4.27
+call :BuildAndPackage 5.0
+call :BuildAndPackage 5.1
+call :BuildAndPackage 5.2
+call :BuildAndPackage 5.3
 REM
-REM Unreal Engine 5.0
+REM #####################
 REM
 
-REM Let's ensure that the plugin is correctly built for Unreal 5.0
-del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
-call Build.bat 5.0
-REM TODO ensure the build has succeeded
-
-REM check for the binaries
-if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
-  echo Something is wrong, some binaries are missing.
-  exit /b 1
-)
-
-set ARCHIVE_NAME_REL=UE50PlasticPlugin-%VERSION%.zip
-set ARCHIVE_NAME_DBG=UE50PlasticPlugin-%VERSION%-with-debug-symbols.zip
-
-echo on
-del %ARCHIVE_NAME_REL%
-del %ARCHIVE_NAME_DBG%
-
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
-@echo off
-
-REM
-REM Unreal Engine 5.1
-REM
-
-REM Let's ensure that the plugin is correctly built for Unreal 5.1
-del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
-call Build.bat 5.1
-REM TODO ensure the build has succeeded
-
-REM check for the binaries
-if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
-  echo Something is wrong, some binaries are missing.
-  exit /b 1
-)
-
-set ARCHIVE_NAME_REL=UE51PlasticPlugin-%VERSION%.zip
-set ARCHIVE_NAME_DBG=UE51PlasticPlugin-%VERSION%-with-debug-symbols.zip
-
-echo on
-del %ARCHIVE_NAME_REL%
-del %ARCHIVE_NAME_DBG%
-
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
-@echo off
-
-REM
-REM Unreal Engine 5.2
-REM
-
-REM Let's ensure that the plugin is correctly built for Unreal 5.2
-del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
-call Build.bat 5.2
-REM TODO ensure the build has succeeded
-
-REM check for the binaries
-if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
-  echo Something is wrong, some binaries are missing.
-  exit /b 1
-)
-
-set ARCHIVE_NAME_REL=UE52PlasticPlugin-%VERSION%.zip
-set ARCHIVE_NAME_DBG=UE52PlasticPlugin-%VERSION%-with-debug-symbols.zip
-
-echo on
-del %ARCHIVE_NAME_REL%
-del %ARCHIVE_NAME_DBG%
-
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
-@echo off
-
-REM
-REM Unreal Engine 5.3
-REM
-
-REM Let's ensure that the plugin is correctly built for Unreal 5.3
-del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
-call Build.bat 5.3
-REM TODO ensure the build has succeeded
-
-REM check for the binaries
-if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
-  echo Something is wrong, some binaries are missing.
-  exit /b 1
-)
-
-set ARCHIVE_NAME_REL=UE53PlasticPlugin-%VERSION%.zip
-set ARCHIVE_NAME_DBG=UE53PlasticPlugin-%VERSION%-with-debug-symbols.zip
-
-echo on
-del %ARCHIVE_NAME_REL%
-del %ARCHIVE_NAME_DBG%
-
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
-@echo off
-
-REM
-REM Done
-REM
-
-echo .
+echo.
 echo NOTE: After validation, push the new tag using:
 echo   git push https://github.com/PlasticSCM/UEPlasticPlugin.git %VERSION%
+
+exit /b %ERRORLEVEL%
+
+
+
+REM
+REM ################# BuildAndPackage Function
+REM
+
+:BuildAndPackage
+
+set UNREAL_ENGINE=%~1
+
+REM Let's ensure that the plugin correctly builds
+del /Q Plugins\UEPlasticPlugin\Binaries\Win64\*
+call Build.bat %UNREAL_ENGINE%
+
+if "%UNREAL_ENGINE%" == "4.27" (
+  if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UE4Editor-PlasticSourceControl.dll (
+    echo Something is wrong, UE4Editor-PlasticSourceControl.dll binaries are missing.
+    exit /b 1
+  )
+) else (
+  if NOT exist Plugins\UEPlasticPlugin\Binaries\Win64\UnrealEditor-PlasticSourceControl.dll (
+    echo Something is wrong, UnrealEditor-PlasticSourceControl.dll binaries are missing.
+    exit /b 1
+  )
+)
+
+set ARCHIVE_NAME_REL=UE%UNREAL_ENGINE%_PlasticPlugin-%VERSION%.zip
+set ARCHIVE_NAME_DBG=UE%UNREAL_ENGINE%_PlasticPlugin-%VERSION%-with-debug-symbols.zip
+
+echo on
+del %ARCHIVE_NAME_REL%
+del %ARCHIVE_NAME_DBG%
+
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
+@echo off
+
+echo Done for Unreal Engine %UNREAL_ENGINE%
+echo.
+
+exit /b %ERRORLEVEL%
+
+REM
+REM #################
+REM
