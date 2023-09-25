@@ -48,11 +48,12 @@ def call_cpplint(file_list):
     cpplint.ParseArguments(cpplint_args)
     cpplint._cpplint_state.ResetErrorCounts()
 
+    print(f"Run cpplint on {len(file_list)} files")
 #    print(f"Run cpplint on {len(file_list)} writable file(s):\n- " + "\n- ".join(file_list) + "\n")
 #    sys.stdout.flush()
 
     for filename in file_list:
-        print(f"Run cpplint on {filename}")
+        # print(f"Run cpplint on {filename}")
         sys.stdout.flush()
         cpplint.ProcessFile(filename, cpplint._cpplint_state.verbose_level)
     # If --quiet is passed, suppress printing error count unless there are errors.

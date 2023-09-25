@@ -3528,7 +3528,7 @@ def CheckSpacingForFunctionCall(filename, clean_lines, linenum, error):
       # If the closing parenthesis is preceded by only whitespaces,
       # try to give a more descriptive error message.
       if Search(r'^\s+\)', fncall):
-        error(filename, linenum, 'whitespace/parens', 2,
+        error(filename, linenum, 'whitespace/parens', 0,
               'Closing ) should be moved to the previous line')
       else:
         error(filename, linenum, 'whitespace/parens', 2,
@@ -6683,9 +6683,8 @@ def ProcessFile(filename, vlevel, extra_check_functions=None):
                     extra_check_functions)
 
     # SRombauts:
-    # Issue warnings on the first line with CR-LF
-
-    if crlf_lines:
+    # Mixed enlines! Issue an error on the first line with CR-LF
+    if lf_lines and crlf_lines:
       linenum = crlf_lines[0]
       Error(filename, linenum, 'whitespace/endline', 5,
             'Unexpected \\r (^M) found; better to use only \\n')
