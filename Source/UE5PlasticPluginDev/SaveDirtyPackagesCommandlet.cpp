@@ -3,9 +3,9 @@
 #include "SaveDirtyPackagesCommandlet.h"
 
 #if WITH_EDITOR
-#include "Editor/UnrealEd/Public/FileHelpers.h"
-#include "SourceControl/Public/ISourceControlModule.h"
-#include "SourceControl/Public/SourceControlHelpers.h"
+#include "FileHelpers.h"
+#include "ISourceControlModule.h"
+#include "SourceControlHelpers.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogSaveDirtyPackagesCommandlet, Log, All);
 #endif
