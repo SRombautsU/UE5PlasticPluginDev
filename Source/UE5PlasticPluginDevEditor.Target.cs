@@ -9,6 +9,10 @@ public class UE5PlasticPluginDevEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
+
+		// Required starting from UE 5.4
+		WindowsPlatform.bStrictConformanceMode = true;
+
 		ExtraModuleNames.Add("UE5PlasticPluginDev");
 
 		// Uncomment to rebuild the whole project without Unity Build, compiling each cpp source file individually, in order to test Includ Whay You Use (IWYU) policy
