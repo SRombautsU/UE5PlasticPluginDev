@@ -12,21 +12,16 @@ if [%1] == [] (
   set ENGINE=%1
 )
 
-if "%ENGINE%" == "4.27" (
-  set ENGINEPATH="C:\Program Files\Epic Games\UE_%ENGINE%"
-  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool.exe
-  REM Legacy "Rocket" binary build of Unreal Engine 4 (using -Engine would try and fail to build the tools)
-  set ROCKETENGINE=-Rocket
-) else if "%ENGINE%" == "S" (
-  set ENGINEPATH="C:\Workspace\UnrealEngine"
-  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
+if "%ENGINE%" == "S" (
   REM Source code Engine
+  set ENGINEPATH="C:\Workspace\UnrealEngine"
   set ROCKETENGINE=-Engine
 ) else (
   set ENGINEPATH="C:\Program Files\Epic Games\UE_%ENGINE%"
-  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
-  set ROCKETENGINE=-Engine
+  set ROCKETENGINE=-Rocket
 )
+
+set UBT=%ENGINEPATH%\Engine\Build\BatchFiles\Build.bat
 
 if not exist %UBT% (
   echo %UBT% not found
@@ -66,7 +61,7 @@ REM [CommandLine("-Rider", Value = nameof(ProjectFileFormat.Rider))]
 echo on
 @echo.
 @echo ## Visual Studio 2019/2022:
-%UBT% %UPROJECT% -ProjectFiles -Game %ROCKETENGINE%
+%UBT% -ProjectFiles %UPROJECT% -game %ROCKETENGINE% -progress 
 @echo.
 @REM @echo ## Visual Studio Code:
 @REM %UBT% %UPROJECT% -ProjectFiles -Game %ROCKETENGINE% -VSCode

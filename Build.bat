@@ -12,16 +12,16 @@ if [%1] == [] (
   set ENGINE=%1
 )
 
-if "%ENGINE%" == "4.27" (
-  set ENGINEPATH="C:\Program Files\Epic Games\UE_%ENGINE%"
-  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool.exe
-) else if "%ENGINE%" == "S" (
+if "%ENGINE%" == "S" (
+  REM Source code Engine
   set ENGINEPATH="C:\Workspace\UnrealEngine"
-  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
+  set ROCKETENGINE=-Engine
 ) else (
   set ENGINEPATH="C:\Program Files\Epic Games\UE_%ENGINE%"
-  set UBT=!ENGINEPATH!\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe
+  set ROCKETENGINE=-Rocket
 )
+
+set UBT=%ENGINEPATH%\Engine\Build\BatchFiles\Build.bat
 
 if not exist %UBT% (
   echo %UBT% not found
