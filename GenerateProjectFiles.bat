@@ -7,7 +7,7 @@ pushd %ROOTPATH%
 
 REM Default to the latest Unreal Engine 5 version but can be overriden by any other version, a source build from Github, or even UE4
 if [%1] == [] (
-  set ENGINE=5.4
+  set ENGINE=5.5
 ) else (
   set ENGINE=%1
 )

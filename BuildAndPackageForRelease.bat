@@ -63,6 +63,9 @@ call :BuildAndPackage 5.1
 call :BuildAndPackage 5.2
 call :BuildAndPackage 5.3
 call :BuildAndPackage 5.4
+REM TODO THIS MIGHT NOT BE POSSIBLE WITHOUT A PAUSE AND A MANUAL SOURCE CODE CHANGE!
+set /p PAUSE="WARNING: you have to edit the TODO build files before compiling for UE5.5 (ENTER)"
+call :BuildAndPackage 5.5
 REM
 REM #####################
 REM

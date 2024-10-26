@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.4",
+	"EngineAssociation": "5.5",
 	"Category": "Editor",
 	"Description": "Unity Version Control (Formerly Plastic SCM) plugin development environment.",
 	"Modules": [

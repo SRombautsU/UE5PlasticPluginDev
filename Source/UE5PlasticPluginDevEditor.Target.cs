@@ -8,10 +8,16 @@ public class UE5PlasticPluginDevEditorTarget : TargetRules
 	public UE5PlasticPluginDevEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-		DefaultBuildSettings = BuildSettingsVersion.V2;
+		DefaultBuildSettings = BuildSettingsVersion.V5;
+		
+		// TODO: not sure from when
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
 		// Required starting from UE 5.4
 		WindowsPlatform.bStrictConformanceMode = true;
+		
+		// Required starting from UE 5.5
+		CppStandard = CppStandardVersion.Cpp20;
 
 		ExtraModuleNames.Add("UE5PlasticPluginDev");
 
