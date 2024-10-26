@@ -9,6 +9,7 @@ Makefile
 CMakeLists.txt
 .ignore
 .vscode
+.idea
 .vsconfig
 .vs
 *.VC.db
