@@ -58,7 +58,6 @@ if [%GIT_TAG%] == [] (
 REM
 REM #####################
 REM
-call :BuildAndPackage 4.27
 call :BuildAndPackage 5.0
 call :BuildAndPackage 5.1
 call :BuildAndPackage 5.2
