@@ -15,10 +15,8 @@ if [%1] == [] (
 if "%ENGINE%" == "S" (
   REM Source code Engine
   set ENGINEPATH=C:\Workspace\UnrealEngine
-  set ROCKETENGINE=-Engine
 ) else (
   set ENGINEPATH=C:\Program Files\Epic Games\UE_%ENGINE%
-  set ROCKETENGINE=-Rocket
 )
 
 set UBT="%ENGINEPATH%\Engine\Build\BatchFiles\Build.bat"
