@@ -54,18 +54,24 @@ if [%GIT_TAG%] == [] (
   @echo off
 )
 
+set /p PAUSE="WARNING: Make sure that Source\UE5PlasticPluginDevEditor.Target.cs has "bUseUnityBuild" set to true, commented or removed (ENTER)"
 
 REM
 REM #####################
 REM
 call :BuildAndPackage 5.0
 call :BuildAndPackage 5.1
+
+REM NOTE: Unreal 5.2 deprecated bEnforceIWYU, we have to edit "PlasticSourceControl.Build.cs" manually before continuing!
+set /p PAUSE="WARNING: you have to edit Plugins\UEPlasticPlugin\Source\PlasticSourceControl\PlasticSourceControl.Build.cs and uncomment "IWYUSupport = IWYUSupport.Full;" instead of "bEnforceIWYU = true;" (ENTER)"
 call :BuildAndPackage 5.2
 call :BuildAndPackage 5.3
 call :BuildAndPackage 5.4
-REM NOTE: compiling for Unreal 5.5 is not possible without editing the project Target.cs file manually before continuing!
-set /p PAUSE="WARNING: you have to edit Source/UE5PlasticPluginDevEditor.Target.cs files before compiling for UE5.5 (ENTER)"
+
+REM NOTE: Unreal 5.5 requires C++20 if not compiling with Unity Builds, we have to edit "UE5PlasticPluginDevEditor.Target.cs" manually before continuing!
+REM set /p PAUSE="WARNING: you have to edit Source\UE5PlasticPluginDevEditor.Target.cs and uncomment CppStandard = CppStandardVersion.Cpp20; before compiling for UE5.5 (ENTER)"
 call :BuildAndPackage 5.5
+
 REM
 REM Done
 REM
