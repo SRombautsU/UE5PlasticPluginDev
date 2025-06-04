@@ -7,7 +7,7 @@ pushd %ROOTPATH%
 
 REM Default to the latest Unreal Engine 5 version but can be overriden by any other version, a source build from Github, or even UE4
 if [%1] == [] (
-  set ENGINE=5.5
+  set ENGINE=5.6
 ) else (
   set ENGINE=%1
 )
@@ -15,8 +15,10 @@ if [%1] == [] (
 if "%ENGINE%" == "S" (
   REM Source code Engine
   set ENGINEPATH=C:\Workspace\UnrealEngine
+  set ROCKETENGINE=-Engine
 ) else (
   set ENGINEPATH=C:\Program Files\Epic Games\UE_%ENGINE%
+  set ROCKETENGINE=-Rocket
 )
 
 set UBT="%ENGINEPATH%\Engine\Build\BatchFiles\Build.bat"

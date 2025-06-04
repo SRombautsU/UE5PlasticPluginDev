@@ -54,26 +54,34 @@ if [%GIT_TAG%] == [] (
   @echo off
 )
 
+echo Check that Plugins\UEPlasticPlugin\Source\PlasticSourceControl\PlasticSourceControl.Build.cs had "bEnforceIWYU = true;" enabled and clean the file for release.
 set /p PAUSE="WARNING: Make sure that Source\UE5PlasticPluginDevEditor.Target.cs has "bUseUnityBuild" set to true, commented or removed (ENTER)"
 
 REM
 REM #####################
 REM
 call :BuildAndPackage 5.0
+
+REM NOTE: Unreal 5.1 would like IncludeOrderVersion = EngineIncludeOrderVersion.Latest; we have to edit "UE5PlasticPluginDevEditor.Target.csmanually before continuing!
+set /p PAUSE="WARNING: you have to edit Source\UE5PlasticPluginDevEditor.Target.cs and uncomment "IncludeOrderVersion = EngineIncludeOrderVersion.Latest;" before compiling for UE5.1 (ENTER)"
+
 call :BuildAndPackage 5.1
 
 REM NOTE: Unreal 5.2 deprecated bEnforceIWYU, we have to edit "PlasticSourceControl.Build.cs" manually before continuing!
-set /p PAUSE="WARNING: you have to edit Plugins\UEPlasticPlugin\Source\PlasticSourceControl\PlasticSourceControl.Build.cs and uncomment "IWYUSupport = IWYUSupport.Full;" instead of "bEnforceIWYU = true;" (ENTER)"
+set /p PAUSE="WARNING: you have to edit Plugins\UEPlasticPlugin\Source\PlasticSourceControl\PlasticSourceControl.Build.cs and uncomment "IWYUSupport = IWYUSupport.Full;" instead of "bEnforceIWYU = true;" before compiling for UE5.2 (ENTER)"
 call :BuildAndPackage 5.2
 call :BuildAndPackage 5.3
+
+REM NOTE: Unreal 5.4 requires strict conformance mode, we have to edit "UE5PlasticPluginDevEditor.Target.cs" manually before continuing!
+set /p PAUSE="WARNING: you have to edit Source\UE5PlasticPluginDevEditor.Target.cs and uncomment WindowsPlatform.bStrictConformanceMode = true; before compiling for UE5.4 (ENTER)"
 call :BuildAndPackage 5.4
 
 REM NOTE: Unreal 5.5 requires C++20 if not compiling with Unity Builds, we have to edit "UE5PlasticPluginDevEditor.Target.cs" manually before continuing!
-REM set /p PAUSE="WARNING: you have to edit Source\UE5PlasticPluginDevEditor.Target.cs and uncomment CppStandard = CppStandardVersion.Cpp20; before compiling for UE5.5 (ENTER)"
+set /p PAUSE="WARNING: you have to edit Source\UE5PlasticPluginDevEditor.Target.cs and uncomment CppStandard = CppStandardVersion.Cpp20; before compiling for UE5.5 (ENTER)"
 call :BuildAndPackage 5.5
-
+call :BuildAndPackage 5.6
 REM
-REM Done
+REM #####################
 REM
 
 echo.
@@ -115,8 +123,8 @@ echo on
 del %ARCHIVE_NAME_REL%
 del %ARCHIVE_NAME_DBG%
 
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!"cm.log.conf" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
-Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!"cm.log.conf" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_REL% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots -xr!"*.pdb"
+Tools\7-Zip\x64\7za.exe a -tzip %ARCHIVE_NAME_DBG% Plugins -xr!".git*" -xr!Intermediate -xr!.editorconfig -xr!_config.yml -xr!Screenshots
 @echo off
 
 echo Done for Unreal Engine %UNREAL_ENGINE%

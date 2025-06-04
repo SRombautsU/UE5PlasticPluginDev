@@ -11,14 +11,13 @@ public class UE5PlasticPluginDevEditorTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.Latest;
 		ExtraModuleNames.Add("UE5PlasticPluginDev");
 
-		// Optional, from UE 5.1 only
+		// Required starting from UE 5.1
 		// IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
 		// Required starting from UE 5.4
-		WindowsPlatform.bStrictConformanceMode = true;
+		// WindowsPlatform.bStrictConformanceMode = true;
 
 		// Required starting from UE 5.5
-		// NOTE: this needs to be uncommented only for UE5.5!
 		// CppStandard = CppStandardVersion.Cpp20;
 
 		// Set to false to rebuild the whole project without Unity Build, compiling each cpp source file individually, in order to test Includ Whay You Use (IWYU) policy
