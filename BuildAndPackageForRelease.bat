@@ -80,6 +80,7 @@ REM NOTE: Unreal 5.5 requires C++20 if not compiling with Unity Builds, we have 
 set /p PAUSE="WARNING: you have to edit Source\UE5PlasticPluginDevEditor.Target.cs and uncomment CppStandard = CppStandardVersion.Cpp20; before compiling for UE5.5 (ENTER)"
 call :BuildAndPackage 5.5
 call :BuildAndPackage 5.6
+call :BuildAndPackage 5.7
 REM
 REM #####################
 REM
