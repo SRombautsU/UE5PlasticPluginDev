@@ -1,0 +1,42 @@
+# TODO issue with Release/Remove Unlock menu available right after doing a checkout on an asset already locked elswehere
+=> should be prevented as a case of "double lock" but isn't, perhaps do we need to remove the LockId from the cache state!
+
+
+
+# Improved onboarding
+1. Download link if missing Plastic SCM
+2. Enter Credentials & Select the Cloud Organization if not already configured
+
+
+# Add a caching system for Lock List
+Right now it is called way too often, even multiple times in a second! (while it takes 150-200ms to execute in my current workspace)!
+  1. when the user browse their content browser, folder by folder, each folder trigger a new call
+  2. if they have the View Locks window it's even double that (x2)
+
+# Performance issue in the current cache system
+PlasticSourceControlUtils::UpdateCachedStates() report a change in the cache even when there is none, which triggers more useless work
+
+
+# Revision Control Menu
+ - Cleanup by moving all lower priority docs and settings into sub menus => focus on daily Actions on the first level menu
+
+# View Locks window
+ - Configure rules button
+ - Link to documentation
+
+# View Branches window
+ - Open Branch Explorer button
+ - Hierachical tree view
+
+# Changesets History window
+
+https://jira.unity3d.com/browse/VCS-1004711 [UnrealPlugin] Changeset History View
+
+https://dev.epicgames.com/documentation/en-us/uefn/snapshot-history-conflict-resolution-in-unreal-editor-for-fortnite
+
+Add Tasks to the Epic:
+
+ - with filters by date, but also by branches, searching capabilites etc
+ - "preview" the content of each changeset (list of assets)
+ - ability to sync back to any previous changeset (regardless of the branch)
+
